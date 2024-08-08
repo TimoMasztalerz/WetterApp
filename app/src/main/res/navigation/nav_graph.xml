@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/locationFragment">
+
+    <!-- Location Fragment -->
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.example.wetterapp.LocationFragment"
+        android:label="Standort">
+        <action
+            android:id="@+id/action_locationFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment">
+            <argument
+                android:name="cityName"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_locationFragment_to_forecastFragment"
+            app:destination="@id/forecastFragment" />
+        <action
+            android:id="@+id/action_locationFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <!-- Weather Fragment -->
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="com.example.wetterapp.WeatherFragment"
+        android:label="Wetter">
+        <argument
+            android:name="cityName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_weatherFragment_to_forecastFragment"
+            app:destination="@id/forecastFragment" />
+        <action
+            android:id="@+id/action_weatherFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <!-- com.example.wetterapp.com.example.wetterapp.data.Forecast Fragment -->
+    <fragment
+        android:id="@+id/forecastFragment"
+        android:name="com.example.wetterapp.ForecastFragment"
+        android:label="Forecast" />
+
+    <!-- Settings Fragment -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.wetterapp.SettingsFragment"
+        android:label="Settings" />
+
+    <fragment
+        android:id="@+id/warningFragment"
+        android:name="com.example.wetterapp.WarningFragment"
+        android:label="Warnings" />
+</navigation>

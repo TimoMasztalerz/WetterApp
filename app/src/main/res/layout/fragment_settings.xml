@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Back Button -->
+    <ImageButton
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_revert"
+        android:contentDescription="Back"
+        android:background="?attr/selectableItemBackground"
+        android:layout_marginBottom="16dp"
+        android:tint="#000000" />
+
+    <!-- Settings Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:paddingBottom="16dp"/>
+
+    <!-- Temperature Unit Switch -->
+    <Switch
+        android:id="@+id/switchTemperatureUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Use Fahrenheit" />
+
+    <TextView
+        android:id="@+id/textViewTemperatureUnitStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current unit: Celsius"
+        android:paddingTop="8dp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Notifications Switch -->
+    <Switch
+        android:id="@+id/switchNotifications"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:text="Enable Notifications" />
+
+    <TextView
+        android:id="@+id/textViewNotificationsStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Notifications are disabled"
+        android:paddingTop="8dp"
+        android:layout_marginBottom="16dp"/>
+
+
+</LinearLayout>

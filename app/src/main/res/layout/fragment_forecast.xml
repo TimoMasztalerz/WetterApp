@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Back Button positioned at the top left corner -->
+    <ImageButton
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_revert"
+        android:contentDescription="Back"
+        android:background="?attr/selectableItemBackground"
+        android:tint="#000000"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="start" />
+
+    <!-- Title for Weather com.example.wetterapp.com.example.wetterapp.data.Forecast -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:paddingBottom="16dp"
+        android:text="5 day weather report"
+        android:textSize="24sp" />
+
+    <!-- RecyclerView for com.example.wetterapp.com.example.wetterapp.data.Forecast -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewForecast"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
