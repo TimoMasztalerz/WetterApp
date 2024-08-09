@@ -18,11 +18,11 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        // Get the NavHostFragment and NavController
+        // definiere NavHostFragment und NavController
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        // Set up the BottomNavigationView with NavController
+        //  BottomNavigationView mit NavController verknüpfen
         binding.bottomNavigation.setupWithNavController(navController)
     }
 }

@@ -1,10 +1,11 @@
-package com.example.wetterapp
+package com.example.wetterapp.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wetterapp.R
 import com.example.wetterapp.data.Forecast
 
 class ForecastAdapter(

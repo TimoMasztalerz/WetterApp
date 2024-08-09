@@ -1,20 +1,19 @@
-package com.example.wetterapp
+package com.example.wetterapp.data
 
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import android.util.Base64
-import com.example.wetterapp.data.City
-import com.example.wetterapp.data.WeatherResponse
+import com.example.wetterapp.network.WeatherResponse
 import com.example.wetterapp.network.WeatherApi
 
 class WeatherRepository {
     private val api = WeatherApi.service
-
+//Authentifizierung
     private fun getAuthHeader(): String {
         val referece = "${WeatherApi.USERNAME}:${WeatherApi.PASSWORD}"
         return "Basic " + Base64.encodeToString(referece.toByteArray(), Base64.NO_WRAP)
     }
-
+//Städte mit Koorinaten
     fun getCities(): List<City> {
         return listOf(
             City("Berlin", 52.520551, 13.461804),
@@ -38,7 +37,7 @@ class WeatherRepository {
             City("Kempten", 47.7225, 10.3092),
         )
     }
-
+//Wetter nach Stadt abrufen. Gibt es bessere möglichkeiten für Timezonedata??
     suspend fun getWeatherForCity(city: City): WeatherResponse {
         val datetime = ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         val location = "${city.latitude},${city.longitude}"

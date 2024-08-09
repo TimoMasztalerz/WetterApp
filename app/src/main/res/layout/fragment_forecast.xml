@@ -27,7 +27,6 @@
         android:text="5 day weather report"
         android:textSize="24sp" />
 
-    <!-- RecyclerView for com.example.wetterapp.com.example.wetterapp.data.Forecast -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewForecast"
         android:layout_width="match_parent"

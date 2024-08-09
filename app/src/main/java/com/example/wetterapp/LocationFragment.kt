@@ -9,17 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.wetterapp.databinding.FragmentLocationBinding
-import com.example.wetterapp.ui.WeatherViewModel
+import com.example.wetterapp.model.WeatherViewModel
 
 // Fragment zur Auswahl des Standorts für die Wetteranzeige
 class LocationFragment : Fragment() {
 
     private lateinit var binding: FragmentLocationBinding
 
-    // Shared ViewModel der Activity
+    // ViewModel der Activity
     private val viewModel: WeatherViewModel by activityViewModels()
 
-    // Inflates das Layout für dieses Fragment
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,17 +28,16 @@ class LocationFragment : Fragment() {
         return binding.root
     }
 
-    // Wird aufgerufen, nachdem die View erstellt wurde
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+//binde die städte an den Spinner
         viewModel.cities.observe(viewLifecycleOwner) { cities ->
             val cityNames = cities.map { it.name }
-            val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, cityNames)
+            val adapter = ArrayAdapter(requireContext(), R.layout.location_spinner_item, cityNames)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.citySpinner.adapter = adapter
         }
-
+//location bestätigen- daten abrufen
         binding.buttonSubmit.setOnClickListener {
             val selectedCityName = binding.citySpinner.selectedItem.toString()
             val selectedCity = viewModel.cities.value?.firstOrNull { it.name == selectedCityName }

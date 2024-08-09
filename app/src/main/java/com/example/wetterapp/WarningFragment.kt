@@ -23,10 +23,9 @@ class WarningFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Example: Fetch and display weather warnings
         displayWarnings()
     }
-
+//BespielWarnungen
     private fun displayWarnings() {
         // Example warnings
         val warnings = listOf(
@@ -34,8 +33,7 @@ class WarningFragment : Fragment() {
             "heavy rain",
             "gusts of wind"
         )
-
-        // Bind each warning to its respective TextView
+//anzeige der Warnungen aus der Warning Liste nach index
         binding.textViewWarning1.text = warnings.get(0)
         binding.textViewWarning2.text = warnings.get(1)
         binding.textViewWarning3.text = warnings.get(2)

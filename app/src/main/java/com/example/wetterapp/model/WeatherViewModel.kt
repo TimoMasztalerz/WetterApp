@@ -1,4 +1,4 @@
-package com.example.wetterapp.ui
+package com.example.wetterapp.model
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.wetterapp.data.City
-import com.example.wetterapp.WeatherRepository
-import com.example.wetterapp.data.WeatherResponse
+import com.example.wetterapp.data.WeatherRepository
+import com.example.wetterapp.network.WeatherResponse
 import kotlinx.coroutines.launch
 
 class WeatherViewModel : ViewModel() {
@@ -25,7 +25,9 @@ class WeatherViewModel : ViewModel() {
                 val cityList = repository.getCities()
                 _cities.value = cityList
             } catch (e: Exception) {
-                // Handle error
+                Log.e("WeatherViewModel", "Error fetching City data", e)
+
+
             }
         }
     }
@@ -37,7 +39,7 @@ class WeatherViewModel : ViewModel() {
                     val weatherResponse = repository.getWeatherForCity(city)
                     _weatherData.value = weatherResponse
                 } catch (e: Exception) {
-                    Log.e("WeatherViewModel", "Error fetching data", e)
+                    Log.e("WeatherViewModel", "Error fetching Weather data", e)
                 }
             }
         }

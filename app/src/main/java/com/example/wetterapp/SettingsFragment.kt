@@ -29,7 +29,7 @@ class SettingsFragment : Fragment() {
 
         sharedPreferences = requireContext().getSharedPreferences("settings", Context.MODE_PRIVATE)
 
-        // Set the switch state based on the stored preference
+//Der Switch bestimmt die shared preferences
         val useFahrenheit = sharedPreferences.getBoolean("useFahrenheit", false)
         binding.switchTemperatureUnit.isChecked = useFahrenheit
         binding.textViewTemperatureUnitStatus.text = "Current unit: ${if (useFahrenheit) "Fahrenheit" else "Celsius"}"
