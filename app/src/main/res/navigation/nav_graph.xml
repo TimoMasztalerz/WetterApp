@@ -7,7 +7,7 @@
     <!-- Location Fragment -->
     <fragment
         android:id="@+id/locationFragment"
-        android:name="com.example.wetterapp.LocationFragment"
+        android:name="com.example.wetterapp.fragmente.LocationFragment"
         android:label="Standort">
         <action
             android:id="@+id/action_locationFragment_to_weatherFragment"
@@ -27,7 +27,7 @@
     <!-- Weather Fragment -->
     <fragment
         android:id="@+id/weatherFragment"
-        android:name="com.example.wetterapp.WeatherFragment"
+        android:name="com.example.wetterapp.fragmente.WeatherFragment"
         android:label="Wetter">
         <argument
             android:name="cityName"
@@ -43,17 +43,17 @@
     <!-- com.example.wetterapp.com.example.wetterapp.data.Forecast Fragment -->
     <fragment
         android:id="@+id/forecastFragment"
-        android:name="com.example.wetterapp.ForecastFragment"
+        android:name="com.example.wetterapp.fragmente.ForecastFragment"
         android:label="Forecast" />
 
     <!-- Settings Fragment -->
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.wetterapp.SettingsFragment"
+        android:name="com.example.wetterapp.fragmente.SettingsFragment"
         android:label="Settings" />
 
     <fragment
         android:id="@+id/warningFragment"
-        android:name="com.example.wetterapp.WarningFragment"
+        android:name="com.example.wetterapp.fragmente.WarningFragment"
         android:label="Warnings" />
 </navigation>

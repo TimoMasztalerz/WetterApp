@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wetterapp.R
-import com.example.wetterapp.data.Forecast
+import com.example.wetterapp.localdata.Forecast
 
 class ForecastAdapter(
     private val forecastList: List<Forecast>,

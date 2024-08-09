@@ -2,8 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <ImageButton
         android:id="@+id/buttonBack"
@@ -17,10 +17,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp"> <!-- Abstand vergrößert -->
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:orientation="horizontal"> <!-- Abstand vergrößert -->
 
         <ImageView
             android:id="@+id/imageView"
@@ -113,9 +113,10 @@
         android:id="@+id/buttonForecast"
         android:layout_width="251dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="Go to Forecast"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:contentDescription="Go to Forecast"
         android:text="5 day weather Report" />
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.wetterapp
+package com.example.wetterapp.fragmente
 
 import android.os.Bundle
 import android.view.LayoutInflater

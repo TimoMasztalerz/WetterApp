@@ -4,12 +4,15 @@
         android:id="@+id/locationFragment"
         android:icon="@drawable/pngtreevector_house_icon_4013710"
         android:title="@string/title_home" />
-    <item
-        android:id="@+id/settingsFragment"
-        android:icon="@android:drawable/ic_menu_manage"
-        android:title="@string/title_settings" />
+
     <item
         android:id="@+id/warningFragment"
         android:icon="@android:drawable/ic_dialog_alert"
         android:title="@string/title_warnings" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:iconTint="@color/black"
+        android:title="@string/title_settings" />
 </menu>

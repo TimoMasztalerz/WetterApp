@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
+    id ("org.jetbrains.kotlin.kapt")
 }
 
 
@@ -44,7 +45,12 @@ android {
 
 dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation ("androidx.room:room-runtime:2.6.1")
 
+    // Room Compiler
+    implementation ("androidx.room:room-ktx:2.6.1")
+
+    kapt ("androidx.room:room-compiler:2.6.1")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation ("com.squareup.moshi:moshi:1.12.0")

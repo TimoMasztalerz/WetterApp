@@ -1,4 +1,4 @@
-package com.example.wetterapp
+package com.example.wetterapp.fragmente
 
 import android.content.Context
 import android.content.SharedPreferences

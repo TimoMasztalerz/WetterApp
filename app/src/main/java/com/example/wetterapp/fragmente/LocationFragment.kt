@@ -1,4 +1,4 @@
-package com.example.wetterapp
+package com.example.wetterapp.fragmente
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.wetterapp.R
 import com.example.wetterapp.databinding.FragmentLocationBinding
 import com.example.wetterapp.model.WeatherViewModel
 
@@ -33,7 +34,7 @@ class LocationFragment : Fragment() {
 //binde die städte an den Spinner
         viewModel.cities.observe(viewLifecycleOwner) { cities ->
             val cityNames = cities.map { it.name }
-            val adapter = ArrayAdapter(requireContext(), R.layout.location_spinner_item, cityNames)
+            val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, cityNames)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.citySpinner.adapter = adapter
         }

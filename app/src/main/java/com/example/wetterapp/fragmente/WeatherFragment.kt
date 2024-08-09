@@ -1,4 +1,4 @@
-package com.example.wetterapp
+package com.example.wetterapp.fragmente
 
 import android.content.Context
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.wetterapp.R
 import com.example.wetterapp.databinding.FragmentWeatherBinding
 import com.example.wetterapp.model.WeatherViewModel
 
@@ -43,7 +44,7 @@ class WeatherFragment : Fragment() {
                 temperatureInCelsius
             }
             //Binding
-            
+
             binding.textViewTemperature.text =
                 "Temperature: ${displayTemperature}°${if (useFahrenheit) "F" else "C"}"
             binding.textViewHumidity.text =

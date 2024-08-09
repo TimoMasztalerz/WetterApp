@@ -1,6 +1,5 @@
 package com.example.wetterapp.network
 
-import com.example.wetterapp.data.Forecast
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
