@@ -4,10 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 
-class Dao {
-}
-
-
 @Dao
 interface WarningDao {
     @Insert
@@ -15,6 +11,9 @@ interface WarningDao {
 
     @Query("SELECT * FROM warnings")
     suspend fun getAllWarnings(): List<Warning>
+
+    @Query("DELETE FROM warnings")
+    suspend fun deleteAllWarnings()
 }
 
 @Dao
@@ -24,4 +23,7 @@ interface ForecastDao {
 
     @Query("SELECT * FROM forecast")
     suspend fun getAllForecasts(): List<Forecast>
+
+    @Query("DELETE FROM forecast")
+    suspend fun deleteAllForecasts()
 }

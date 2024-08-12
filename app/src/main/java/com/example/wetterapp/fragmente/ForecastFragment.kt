@@ -60,15 +60,18 @@ class ForecastFragment : Fragment() {
     }
 
     private suspend fun saveForecasts(forecastDao: ForecastDao) {
-        val exampleData = listOf(
-            Forecast(date = "2024-08-07", maxTemp = 25.0, minTemp = 18.0, weatherCondition = "Sunny"),
-            Forecast(date = "2024-08-08", maxTemp = 22.0, minTemp = 16.0, weatherCondition = "Cloudy"),
-            Forecast(date = "2024-08-09", maxTemp = 20.0, minTemp = 15.0, weatherCondition = "Rainy"),
-            Forecast(date = "2024-08-10", maxTemp = 23.0, minTemp = 17.0, weatherCondition = "Partly Cloudy"),
-            Forecast(date = "2024-08-11", maxTemp = 24.0, minTemp = 19.0, weatherCondition = "Sunny")
-        )
-        forecastDao.insertAll(exampleData)
+        if (forecastDao.getAllForecasts().isEmpty()) {
+            val exampleData = listOf(
+                Forecast(date = "2024-08-07", maxTemp = 25.0, minTemp = 18.0, weatherCondition = "Sunny"),
+                Forecast(date = "2024-08-08", maxTemp = 22.0, minTemp = 16.0, weatherCondition = "Cloudy"),
+                Forecast(date = "2024-08-09", maxTemp = 20.0, minTemp = 15.0, weatherCondition = "Rainy"),
+                Forecast(date = "2024-08-10", maxTemp = 23.0, minTemp = 17.0, weatherCondition = "Partly Cloudy"),
+                Forecast(date = "2024-08-11", maxTemp = 24.0, minTemp = 19.0, weatherCondition = "Sunny")
+            )
+            forecastDao.insertAll(exampleData)
+        }
     }
+
 
     private fun setupBackButton() {
         binding.buttonBack.setOnClickListener {

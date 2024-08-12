@@ -10,6 +10,8 @@ import com.example.wetterapp.data.WeatherRepository
 import com.example.wetterapp.network.WeatherResponse
 import kotlinx.coroutines.launch
 
+
+
 class WeatherViewModel : ViewModel() {
     private val repository = WeatherRepository()
 
@@ -33,15 +35,15 @@ class WeatherViewModel : ViewModel() {
     }
 
 
-        fun fetchWeatherForCity(city: City) {
-            viewModelScope.launch {
-                try {
-                    val weatherResponse = repository.getWeatherForCity(city)
-                    _weatherData.value = weatherResponse
-                } catch (e: Exception) {
-                    Log.e("WeatherViewModel", "Error fetching Weather data", e)
-                }
+    fun fetchWeatherForCity(city: City) {
+        viewModelScope.launch {
+            try {
+                val weatherResponse = repository.getWeatherForCity(city)
+                _weatherData.value = weatherResponse
+            } catch (e: Exception) {
+                Log.e("WeatherViewModel", "Error fetching Weather data", e)
             }
         }
     }
+}
 

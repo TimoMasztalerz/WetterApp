@@ -14,14 +14,13 @@ class ForecastAdapter(
 ) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_forecast, parent, false)
-        return ForecastViewHolder(view)
+        return ForecastViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_forecast, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
-        val forecast = forecastList[position]
-        holder.bind(forecast, useFahrenheit)
+        holder.bind(forecastList[position], useFahrenheit)
     }
 
     override fun getItemCount(): Int = forecastList.size

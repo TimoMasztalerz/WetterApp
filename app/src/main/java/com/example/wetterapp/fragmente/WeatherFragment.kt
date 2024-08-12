@@ -39,7 +39,7 @@ class WeatherFragment : Fragment() {
                 weatherResponse.getValueOrNA("t_2m:C")?.toDoubleOrNull() ?: 0.0
             //C oder F
             val displayTemperature = if (useFahrenheit) {
-                convertCelsiusToFahrenheit(temperatureInCelsius)
+                CelsiusToFahrenheit(temperatureInCelsius)
             } else {
                 temperatureInCelsius
             }
@@ -53,7 +53,7 @@ class WeatherFragment : Fragment() {
                 "Wind Speed: ${weatherResponse.getValueOrNA("wind_speed_10m:ms") ?: "N/A"} m/s"
         }
 
-        setupBackButton()
+        BackButton()
 
         // Navigiere zu ForecastFragment
         binding.buttonForecast.setOnClickListener {
@@ -62,7 +62,7 @@ class WeatherFragment : Fragment() {
 
     }
 
-    private fun setupBackButton() {
+    private fun BackButton() {
         binding.buttonBack.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -71,8 +71,8 @@ class WeatherFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
     }
-//wandle in fahrenheit um
-    private fun convertCelsiusToFahrenheit(celsius: Double): Double {
+    //wandle in fahrenheit um
+    private fun CelsiusToFahrenheit(celsius: Double): Double {
         return (celsius * 9 / 5) + 32
     }
 }

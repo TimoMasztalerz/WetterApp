@@ -1,4 +1,5 @@
 package com.example.wetterapp.localdata
+
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -9,7 +10,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun forecastDao(): ForecastDao
 
     companion object {
-        @Volatile
         private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase {

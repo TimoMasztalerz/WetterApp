@@ -10,11 +10,11 @@ object WeatherApi {
     private const val BASE_URL = "https://api.meteomatics.com/"
     const val USERNAME = "syntax_stadelmayer_timo"
     const val PASSWORD = "U6T2s26Cae"
-//Imwandlung von Json in Kotlin und ungekehrt
+    //Imwandlung von Json in Kotlin und ungekehrt
     private val moshi = Moshi.Builder()
         .addLast(KotlinJsonAdapterFactory())
         .build()
-// Retrofit erstellt die URL mit den Endpunkte glaub ich
+    // Retrofit erstellt die URL mit den Endpunkte glaub ich
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
