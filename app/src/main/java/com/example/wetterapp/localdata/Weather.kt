@@ -20,5 +20,6 @@ data class Forecast(
     val date: String,
     val maxTemp: Double,
     val minTemp: Double,
-    val weatherCondition: String
+    val weatherCondition: String,
+
 )

@@ -1,11 +1,9 @@
 package com.example.wetterapp.ui
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wetterapp.R
+import com.example.wetterapp.databinding.ItemForecastBinding
 import com.example.wetterapp.localdata.Forecast
 
 class ForecastAdapter(
@@ -14,9 +12,12 @@ class ForecastAdapter(
 ) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
-        return ForecastViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_forecast, parent, false)
+        val binding = ItemForecastBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
+        return ForecastViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
@@ -25,16 +26,13 @@ class ForecastAdapter(
 
     override fun getItemCount(): Int = forecastList.size
 
-    class ForecastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val dayTextView: TextView = itemView.findViewById(R.id.textViewDay)
-        private val conditionTextView: TextView = itemView.findViewById(R.id.textViewCondition)
-        private val tempTextView: TextView = itemView.findViewById(R.id.textViewTemp)
+    class ForecastViewHolder(private val binding: ItemForecastBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(forecast: Forecast, useFahrenheit: Boolean) {
-            dayTextView.text = forecast.date
-            conditionTextView.text = forecast.weatherCondition
+            binding.textViewDay.text = forecast.date
+            binding.textViewCondition.text = forecast.weatherCondition
             val unit = if (useFahrenheit) "°F" else "°C"
-            tempTextView.text = "High: ${forecast.maxTemp}$unit, Low: ${forecast.minTemp}$unit"
+            binding.textViewTemp.text = "High: ${forecast.maxTemp}$unit, Low: ${forecast.minTemp}$unit"
         }
     }
 }
