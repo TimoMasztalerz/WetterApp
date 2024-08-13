@@ -10,8 +10,6 @@ import com.example.wetterapp.data.WeatherRepository
 import com.example.wetterapp.network.WeatherResponse
 import kotlinx.coroutines.launch
 
-
-
 class WeatherViewModel : ViewModel() {
     private val repository = WeatherRepository()
 

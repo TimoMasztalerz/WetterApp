@@ -19,7 +19,7 @@ object WeatherApi {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    private val builder = OkHttpClient.Builder()
+    private val client = OkHttpClient.Builder()
         .addInterceptor { chain ->
             val original = chain.request()
             val requestBuilder = original.newBuilder()
@@ -35,7 +35,7 @@ object WeatherApi {
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .client(builder)
+        .client(client)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 

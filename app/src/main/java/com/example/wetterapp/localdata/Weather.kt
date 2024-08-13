@@ -23,3 +23,10 @@ data class Forecast(
     val weatherCondition: String,
 
 )
+
+@Entity(tableName = "cities")
+data class City(
+    @PrimaryKey val name: String,
+    val latitude: Double,
+    val longitude: Double
+)
