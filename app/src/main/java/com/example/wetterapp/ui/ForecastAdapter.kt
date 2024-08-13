@@ -12,27 +12,21 @@ class ForecastAdapter(
 ) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
-        val binding = ItemForecastBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+        val binding = ItemForecastBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ForecastViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
-        holder.bind(forecastList[position], useFahrenheit)
+        val forecast = forecastList[position]
+        holder.binding.apply {
+            textViewDay.text = forecast.date
+            textViewCondition.text = forecast.weatherCondition
+            val unit = if (useFahrenheit) "°F" else "°C"
+            textViewTemp.text = "High: ${forecast.maxTemp}$unit, Low: ${forecast.minTemp}$unit"
+        }
     }
 
     override fun getItemCount(): Int = forecastList.size
 
-    class ForecastViewHolder(private val binding: ItemForecastBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(forecast: Forecast, useFahrenheit: Boolean) {
-            binding.textViewDay.text = forecast.date
-            binding.textViewCondition.text = forecast.weatherCondition
-            val unit = if (useFahrenheit) "°F" else "°C"
-            binding.textViewTemp.text = "High: ${forecast.maxTemp}$unit, Low: ${forecast.minTemp}$unit"
-        }
-    }
+    inner class ForecastViewHolder(val binding: ItemForecastBinding) : RecyclerView.ViewHolder(binding.root)
 }

@@ -8,7 +8,7 @@ import com.example.wetterapp.network.WeatherResponse
 import com.example.wetterapp.network.WeatherApi
 
 class WeatherRepository {
-    private val api = WeatherApi.service
+    private val api = WeatherApi.apiService
     //Authentifizierung
     private fun getAuthHeader(): String {
         val credentials = "${BuildConfig.WEATHER_API_USERNAME}:${BuildConfig.WEATHER_API_PASSWORD}"
