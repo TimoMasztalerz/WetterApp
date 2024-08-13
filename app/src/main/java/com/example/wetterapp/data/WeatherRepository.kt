@@ -3,6 +3,7 @@ package com.example.wetterapp.data
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import android.util.Base64
+import com.example.wetterapp.BuildConfig
 import com.example.wetterapp.network.WeatherResponse
 import com.example.wetterapp.network.WeatherApi
 
@@ -10,8 +11,8 @@ class WeatherRepository {
     private val api = WeatherApi.service
     //Authentifizierung
     private fun getAuthHeader(): String {
-        val referece = "${WeatherApi.USERNAME}:${WeatherApi.PASSWORD}"
-        return "Basic " + Base64.encodeToString(referece.toByteArray(), Base64.NO_WRAP)
+        val credentials = "${BuildConfig.WEATHER_API_USERNAME}:${BuildConfig.WEATHER_API_PASSWORD}"
+        return "Basic " + Base64.encodeToString(credentials.toByteArray(), Base64.NO_WRAP)
     }
     //Städte mit Koorinaten
     fun getCities(): List<City> {

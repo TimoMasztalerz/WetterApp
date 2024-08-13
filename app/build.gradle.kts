@@ -2,8 +2,10 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
-    id("org.jetbrains.kotlin.kapt")
+    id ("org.jetbrains.kotlin.kapt")
 }
+
+
 android {
     namespace = "com.example.wetterapp"
     compileSdk = 34
@@ -16,20 +18,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-
-
-
-        // Define buildConfigField with environment variables
-        buildConfigField("String", "WEATHER_API_USERNAME", "\"${System.getenv("WEATHER_API_USERNAME")}\"")
-        buildConfigField("String", "WEATHER_API_PASSWORD", "\"${System.getenv("WEATHER_API_PASSWORD")}\"")
+        buildConfigField("String", "WEATHER_API_USERNAME", "\"${project.property("WEATHER_API_USERNAME")}\"")
+        buildConfigField("String", "WEATHER_API_PASSWORD", "\"${project.property("WEATHER_API_PASSWORD")}\"")
     }
-
     buildFeatures {
         viewBinding = true
         dataBinding = true
-        buildConfig = true // Enable custom BuildConfig fields
+        buildConfig = true
     }
+
 
     buildTypes {
         release {
@@ -49,16 +46,19 @@ android {
     }
 }
 
-
 dependencies {
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation("com.squareup.moshi:moshi:1.12.0")
-    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation ("androidx.room:room-runtime:2.6.1")
+    implementation ("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    // Room Compiler
+    implementation ("androidx.room:room-ktx:2.6.1")
+
+    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation ("com.squareup.moshi:moshi:1.12.0")
+    implementation ("com.squareup.moshi:moshi-kotlin:1.12.0")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
