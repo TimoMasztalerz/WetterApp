@@ -15,9 +15,16 @@ class WeatherViewModel : ViewModel() {
 
     private val _cities = MutableLiveData<List<City>>()
     val cities: LiveData<List<City>> = _cities
+
     private val _weatherData = MutableLiveData<WeatherResponse>()
     val weatherData: LiveData<WeatherResponse> = _weatherData
 
+    private val _weatherSymbolUrl = MutableLiveData<String>()
+    val weatherSymbolUrl: LiveData<String> = _weatherSymbolUrl
+
+    init {
+        fetchCities()
+    }
 
     fun fetchCities() {
         viewModelScope.launch {
@@ -25,23 +32,20 @@ class WeatherViewModel : ViewModel() {
                 val cityList = repository.getCities()
                 _cities.value = cityList
             } catch (e: Exception) {
-                Log.e("WeatherViewModel", "Error fetching City data", e)
-
-
+                // Fehlerbehandlung
             }
         }
     }
-
 
     fun fetchWeatherForCity(city: City) {
         viewModelScope.launch {
             try {
                 val weatherResponse = repository.getWeatherForCity(city)
                 _weatherData.value = weatherResponse
+                _weatherSymbolUrl.value = weatherResponse.getWeatherSymbolUrl()
             } catch (e: Exception) {
-                Log.e("WeatherViewModel", "Error fetching Weather data", e)
+                Log.e("WeatherViewModel", "Error fetching weather for ${city.name}", e)
             }
         }
     }
 }
-

@@ -27,11 +27,3 @@ interface ForecastDao {
     @Query("DELETE FROM forecast")
     suspend fun deleteAllForecasts()
 }
-@Dao
-interface CityDao {
-    @Insert
-    suspend fun insertAll(cities: List<City>)
-
-    @Query("SELECT * FROM cities")
-    suspend fun getAllCities(): List<City>
-}

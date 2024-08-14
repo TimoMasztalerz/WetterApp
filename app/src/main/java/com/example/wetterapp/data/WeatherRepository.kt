@@ -4,11 +4,11 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import android.util.Base64
 import com.example.wetterapp.BuildConfig
-import com.example.wetterapp.network.WeatherResponse
 import com.example.wetterapp.network.WeatherApi
+import com.example.wetterapp.network.WeatherResponse
 
 class WeatherRepository {
-    private val api = WeatherApi.apiService
+    private val api = WeatherApi
     //Authentifizierung
     private fun getAuthHeader(): String {
         val credentials = "${BuildConfig.WEATHER_API_USERNAME}:${BuildConfig.WEATHER_API_PASSWORD}"
@@ -42,6 +42,7 @@ class WeatherRepository {
     suspend fun getWeatherForCity(city: City): WeatherResponse {
         val datetime = ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         val location = "${city.latitude},${city.longitude}"
-        return api.getCurrentWeather(datetime, location, getAuthHeader())
+        return api.apiService.getCurrentWeather(datetime, location, getAuthHeader())
     }
+
 }

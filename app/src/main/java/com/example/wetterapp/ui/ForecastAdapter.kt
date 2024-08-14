@@ -9,24 +9,30 @@ import com.example.wetterapp.localdata.Forecast
 class ForecastAdapter(
     private val forecastList: List<Forecast>,
     private val useFahrenheit: Boolean
-) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = ItemForecastBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ForecastViewHolder(binding)
+        return forecastViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val forecastBinding = (holder.itemView.tag as? ItemForecastBinding) ?: return
         val forecast = forecastList[position]
-        holder.binding.apply {
-            textViewDay.text = forecast.date
-            textViewCondition.text = forecast.weatherCondition
-            val unit = if (useFahrenheit) "°F" else "°C"
-            textViewTemp.text = "High: ${forecast.maxTemp}$unit, Low: ${forecast.minTemp}$unit"
-        }
+
+        forecastBinding.textViewDay.text = forecast.date
+        forecastBinding.textViewCondition.text = forecast.weatherCondition
+        val unit = if (useFahrenheit) "°F" else "°C"
+        forecastBinding.textViewTemp.text = "High: ${forecast.maxTemp}$unit, Low: ${forecast.minTemp}$unit"
     }
 
     override fun getItemCount(): Int = forecastList.size
 
-    inner class ForecastViewHolder(val binding: ItemForecastBinding) : RecyclerView.ViewHolder(binding.root)
+    private fun forecastViewHolder(binding: ItemForecastBinding): RecyclerView.ViewHolder {
+        return object : RecyclerView.ViewHolder(binding.root) {
+            init {
+                itemView.tag = binding
+            }
+        }
+    }
 }

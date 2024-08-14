@@ -20,13 +20,5 @@ data class Forecast(
     val date: String,
     val maxTemp: Double,
     val minTemp: Double,
-    val weatherCondition: String,
-
-)
-
-@Entity(tableName = "cities")
-data class City(
-    @PrimaryKey val name: String,
-    val latitude: Double,
-    val longitude: Double
+    val weatherCondition: String
 )

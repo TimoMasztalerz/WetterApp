@@ -25,7 +25,7 @@ class WarningFragment : Fragment() {
 
         displayWarnings()
     }
-//BespielWarnungen
+    //BespielWarnungen
     private fun displayWarnings() {
         // Example warnings
         val warnings = listOf(

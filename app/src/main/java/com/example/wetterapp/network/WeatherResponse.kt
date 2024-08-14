@@ -3,17 +3,18 @@ package com.example.wetterapp.network
 import com.squareup.moshi.Json
 
 data class WeatherResponse(
-    @Json(name = "data") val data: List<WetterDaten>
-) {
+    @Json(name = "data") val data: List<WetterDaten>)
+{
     fun getValueOrNA(parameter: String): String? {
         val value = data.firstOrNull { it.parameter == parameter }
             ?.coordinates?.firstOrNull()
             ?.dates?.firstOrNull()
             ?.value
-        return value?.takeIf { it != 0.0 }?.let { String.format("%.1f", it) }
+        return when (value) {
+            is Double -> value.takeIf { it != 0.0 }?.let { String.format("%.1f", it) }
+            else -> null
+        }
     }
-}
-
 data class WetterDaten(
     @Json(name = "parameter") val parameter: String,
     @Json(name = "coordinates") val coordinates: List<Location>
@@ -30,3 +31,14 @@ data class DateValue(
     @Json(name = "date") val date: String,
     @Json(name = "value") val value: Double
 )
+    fun getWeatherSymbolUrl(): String? {
+        val symbolIndex = getWeatherSymbol()
+        return symbolIndex?.let { "https://static.meteomatics.com/meteocool/weather-symbols/${it.toInt()}.png" }
+    }
+
+    private fun getWeatherSymbol(): Double? {
+        return data.find { it.parameter == "weather_symbol_1h:idx" }
+            ?.coordinates?.firstOrNull()
+            ?.dates?.firstOrNull()
+            ?.value as? Double
+    }}

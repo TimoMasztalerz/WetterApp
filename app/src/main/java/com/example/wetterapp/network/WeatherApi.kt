@@ -38,7 +38,7 @@ private val retrofit: Retrofit = Retrofit.Builder()
     .build()
 
 interface WeatherApiService {
-    @GET("{datetime}/t_2m:C,relative_humidity_2m:p,wind_speed_10m:ms/{location}/json")
+    @GET("{datetime}/t_2m:C,relative_humidity_2m:p,wind_speed_10m:ms,weather_symbol_1h:idx/{location}/json")
     suspend fun getCurrentWeather(
         @Path("datetime") datetime: String,
         @Path("location") location: String,
