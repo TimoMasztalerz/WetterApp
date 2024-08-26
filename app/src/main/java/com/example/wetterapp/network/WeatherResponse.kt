@@ -32,13 +32,14 @@ data class DateValue(
     @Json(name = "value") val value: Double
 )
     fun getWeatherSymbolUrl(): String? {
-        val symbolIndex = getWeatherSymbol()
-        return symbolIndex?.let { "https://static.meteomatics.com/meteocool/weather-symbols/${it.toInt()}.png" }
+        return getWeatherSymbol()?.run {
+            "https://static.meteomatics.com/meteocool/weather-symbols/${toInt()}.png"
+        }
     }
 
     private fun getWeatherSymbol(): Double? {
         return data.find { it.parameter == "weather_symbol_1h:idx" }
             ?.coordinates?.firstOrNull()
             ?.dates?.firstOrNull()
-            ?.value as? Double
+            ?.value
     }}

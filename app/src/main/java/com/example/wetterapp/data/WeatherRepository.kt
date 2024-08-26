@@ -9,12 +9,12 @@ import com.example.wetterapp.network.WeatherResponse
 
 class WeatherRepository {
     private val api = WeatherApi
-    //Authentifizierung
+
     private fun getAuthHeader(): String {
         val credentials = "${BuildConfig.WEATHER_API_USERNAME}:${BuildConfig.WEATHER_API_PASSWORD}"
         return "Basic " + Base64.encodeToString(credentials.toByteArray(), Base64.NO_WRAP)
     }
-    //Städte mit Koorinaten
+
     fun getCities(): List<City> {
         return listOf(
             City("Berlin", 52.520551, 13.461804),
@@ -38,11 +38,10 @@ class WeatherRepository {
             City("Kempten", 47.7225, 10.3092),
         )
     }
-    //Wetter nach Stadt abrufen. Gibt es bessere möglichkeiten für Timezonedata??
+
     suspend fun getWeatherForCity(city: City): WeatherResponse {
         val datetime = ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         val location = "${city.latitude},${city.longitude}"
         return api.apiService.getCurrentWeather(datetime, location, getAuthHeader())
     }
-
 }

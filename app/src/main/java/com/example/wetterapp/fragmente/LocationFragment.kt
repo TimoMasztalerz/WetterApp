@@ -12,7 +12,6 @@ import com.example.wetterapp.R
 import com.example.wetterapp.databinding.FragmentLocationBinding
 import com.example.wetterapp.model.WeatherViewModel
 
-// Fragment zur Auswahl des Standorts für die Wetteranzeige
 class LocationFragment : Fragment() {
 
     private lateinit var binding: FragmentLocationBinding
@@ -31,33 +30,37 @@ class LocationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//binde die städte an den Spinner
-        viewModel.cities.observe(viewLifecycleOwner) { cities ->
-            val cityNames = cities.map { it.name }
-            val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, cityNames)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.citySpinner.adapter = adapter
-        }
-//location bestätigen- daten abrufen
+
+        // Binde die Städte an den Spinner
+        setupCitySpinner()
+
+        // Location bestätigen - Daten abrufen
         binding.buttonSubmit.setOnClickListener {
-            val selectedCityName = binding.citySpinner.selectedItem.toString()
-            val selectedCity = viewModel.cities.value?.firstOrNull { it.name == selectedCityName }
-            if (selectedCity != null) {
-                // Ruft das Wetter für die ausgewählte Stadt ab
-                viewModel.fetchWeatherForCity(selectedCity)
-                // Navigiert zum WeatherFragment und übergibt den Stadtnamen
-                val action = LocationFragmentDirections.actionLocationFragmentToWeatherFragment(cityName = selectedCityName)
-                findNavController().navigate(action)
-            }
+            onCitySelected()
         }
 
         // Lädt die Liste der Städte
         viewModel.fetchCities()
     }
 
+    private fun setupCitySpinner() {
+        viewModel.cities.observe(viewLifecycleOwner) { cities ->
+            val cityNames = cities.map { it.name }
+            val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, cityNames)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.citySpinner.adapter = adapter
+        }
+    }
+
+    private fun onCitySelected() {
+        val selectedCityName = binding.citySpinner.selectedItem.toString()
+        viewModel.fetchWeatherForCity(selectedCityName)
+
+        val action = LocationFragmentDirections.actionLocationFragmentToWeatherFragment(cityName = selectedCityName)
+        findNavController().navigate(action)
+    }
     // Wird aufgerufen, wenn die View zerstört wird
     override fun onDestroyView() {
         super.onDestroyView()
-
     }
 }

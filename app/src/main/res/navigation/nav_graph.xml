@@ -24,7 +24,6 @@
             app:destination="@id/settingsFragment" />
     </fragment>
 
-    <!-- Weather Fragment -->
     <fragment
         android:id="@+id/weatherFragment"
         android:name="com.example.wetterapp.fragmente.WeatherFragment"
@@ -40,13 +39,16 @@
             app:destination="@id/settingsFragment" />
     </fragment>
 
-    <!-- com.example.wetterapp.com.example.wetterapp.data.Forecast Fragment -->
+
     <fragment
         android:id="@+id/forecastFragment"
         android:name="com.example.wetterapp.fragmente.ForecastFragment"
-        android:label="Forecast" />
+        android:label="Forecast">
+        <argument
+            android:name="cityName"
+            app:argType="string" />
+    </fragment>
 
-    <!-- Settings Fragment -->
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.wetterapp.fragmente.SettingsFragment"

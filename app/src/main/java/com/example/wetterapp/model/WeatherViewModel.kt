@@ -37,14 +37,19 @@ class WeatherViewModel : ViewModel() {
         }
     }
 
-    fun fetchWeatherForCity(city: City) {
+    fun fetchWeatherForCity(cityName: String) {
         viewModelScope.launch {
             try {
-                val weatherResponse = repository.getWeatherForCity(city)
-                _weatherData.value = weatherResponse
-                _weatherSymbolUrl.value = weatherResponse.getWeatherSymbolUrl()
+                val city = _cities.value?.find { it.name == cityName }
+                if (city != null) {
+                    val weatherResponse = repository.getWeatherForCity(city)
+                    _weatherData.value = weatherResponse
+                    _weatherSymbolUrl.value = weatherResponse.getWeatherSymbolUrl()
+                } else {
+                    Log.e("WeatherViewModel", "City not found: $cityName")
+                }
             } catch (e: Exception) {
-                Log.e("WeatherViewModel", "Error fetching weather for ${city.name}", e)
+                Log.e("WeatherViewModel", "Error fetching weather for $cityName", e)
             }
         }
     }
