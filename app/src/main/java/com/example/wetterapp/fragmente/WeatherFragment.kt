@@ -18,56 +18,31 @@ class WeatherFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: WeatherViewModel by activityViewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentWeatherBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val args = WeatherFragmentArgs.fromBundle(requireArguments())
-        binding.textViewCity.text = args.cityName // Use cityName if that's what you passed
-
-        // Temperatur-Einstellung abrufen
-        val useFahrenheit = requireContext().getSharedPreferences("settings", Context.MODE_PRIVATE)
-            .getBoolean("useFahrenheit", false)
-
-        // Wetterdaten abrufen
-        viewModel.fetchWeatherForCity(args.cityName) // Pass the city name to fetch weather
-
-        // UI aktualisieren
+        binding.textViewCity.text = args.cityName
+        val useFahrenheit = requireContext().getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("useFahrenheit", false)
+        viewModel.fetchWeatherForCity(args.cityName)
         updateUI(useFahrenheit)
-
         setupButtons()
     }
 
     private fun updateUI(useFahrenheit: Boolean) {
         viewModel.weatherData.observe(viewLifecycleOwner) { weatherResponse ->
-            val temperatureInCelsius =
-                weatherResponse.getValueOrNA("t_2m:C")?.toDoubleOrNull() ?: 0.0
-            val displayTemperature =
-                if (useFahrenheit) celsiusToFahrenheit(temperatureInCelsius) else temperatureInCelsius
+            val temperatureInCelsius = weatherResponse.getValueOrNA("t_2m:C")?.toDoubleOrNull() ?: 0.0
+            val displayTemperature = if (useFahrenheit) celsiusToFahrenheit(temperatureInCelsius) else temperatureInCelsius
+            binding.textViewTemperature.text = String.format("Temperature: %.1f°%s", displayTemperature, if (useFahrenheit) "F" else "C")
+            binding.textViewHumidity.text = "Humidity: ${weatherResponse.getValueOrNA("relative_humidity_2m:p") ?: "N/A"}%"
+            binding.textViewWindSpeed.text = "Wind Speed: ${weatherResponse.getValueOrNA("wind_speed_10m:ms") ?: "N/A"} m/s"
 
-            binding.textViewTemperature.text = String.format(
-                "Temperature: %.1f°%s",
-                displayTemperature,
-                if (useFahrenheit) "F" else "C"
-            )
-            binding.textViewHumidity.text =
-                "Humidity: ${weatherResponse.getValueOrNA("relative_humidity_2m:p") ?: "N/A"}%"
-            binding.textViewWindSpeed.text =
-                "Wind Speed: ${weatherResponse.getValueOrNA("wind_speed_10m:ms") ?: "N/A"} m/s"
-        }
-
-        viewModel.weatherSymbolUrl.observe(viewLifecycleOwner) { url ->
-            url?.let {
-                Glide.with(this).load(it).placeholder(R.drawable.raining)
-                    .into(binding.imageViewWeatherSymbol)
+            viewModel.weatherSymbolUrl.observe(viewLifecycleOwner) { url ->
+                url?.let { Glide.with(this).load(it).placeholder(R.drawable.raining).into(binding.imageViewWeatherSymbol) }
             }
         }
     }
@@ -75,8 +50,7 @@ class WeatherFragment : Fragment() {
     private fun setupButtons() {
         binding.buttonBack.setOnClickListener { findNavController().navigateUp() }
         binding.buttonForecast.setOnClickListener {
-            val action =
-                WeatherFragmentDirections.actionWeatherFragmentToForecastFragment(cityName = binding.textViewCity.text.toString())
+            val action = WeatherFragmentDirections.actionWeatherFragmentToForecastFragment(cityName = binding.textViewCity.text.toString())
             findNavController().navigate(action)
         }
     }

@@ -4,7 +4,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/locationFragment">
 
-    <!-- Location Fragment -->
+    <!-- NavGraph -->
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.example.wetterapp.fragmente.LocationFragment"
@@ -39,11 +39,10 @@
             app:destination="@id/settingsFragment" />
     </fragment>
 
-
     <fragment
         android:id="@+id/forecastFragment"
         android:name="com.example.wetterapp.fragmente.ForecastFragment"
-        android:label="Forecast">
+        android:label="Vorhersage">
         <argument
             android:name="cityName"
             app:argType="string" />
@@ -52,10 +51,10 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.wetterapp.fragmente.SettingsFragment"
-        android:label="Settings" />
+        android:label="Einstellungen" />
 
     <fragment
         android:id="@+id/warningFragment"
         android:name="com.example.wetterapp.fragmente.WarningFragment"
-        android:label="Warnings" />
+        android:label="Warnungen" />
 </navigation>

@@ -38,7 +38,8 @@ class ForecastFragment : Fragment() {
 
         setupBackButton()
 
-        val sharedPreferences = requireContext().getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            requireContext().getSharedPreferences("settings", Context.MODE_PRIVATE)
         val useFahrenheit = sharedPreferences.getBoolean("useFahrenheit", false)
 
         val db = AppDatabase.getDatabase(requireContext())
@@ -50,8 +51,10 @@ class ForecastFragment : Fragment() {
             val forecasts = forecastDao.getAllForecasts()
 
             val convertedData = forecasts.map { forecast ->
-                val maxTemp = if (useFahrenheit) convertCelsiusToFahrenheit(forecast.maxTemp) else forecast.maxTemp
-                val minTemp = if (useFahrenheit) convertCelsiusToFahrenheit(forecast.minTemp) else forecast.minTemp
+                val maxTemp =
+                    if (useFahrenheit) convertCelsiusToFahrenheit(forecast.maxTemp) else forecast.maxTemp
+                val minTemp =
+                    if (useFahrenheit) convertCelsiusToFahrenheit(forecast.minTemp) else forecast.minTemp
                 forecast.copy(maxTemp = maxTemp, minTemp = minTemp)
             }
 
@@ -74,9 +77,7 @@ class ForecastFragment : Fragment() {
 
 
     private fun setupBackButton() {
-        binding.buttonBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
+        binding.buttonBack.setOnClickListener { findNavController().navigateUp() }
     }
 
     private fun convertCelsiusToFahrenheit(celsius: Double): Double {
