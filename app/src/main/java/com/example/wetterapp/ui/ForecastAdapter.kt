@@ -3,6 +3,7 @@ package com.example.wetterapp.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wetterapp.R
 import com.example.wetterapp.databinding.ItemForecastBinding
 import com.example.wetterapp.localdata.Forecast
 
@@ -24,6 +25,9 @@ class ForecastAdapter(
         forecastBinding.textViewCondition.text = forecast.weatherCondition
         val unit = if (useFahrenheit) "°F" else "°C"
         forecastBinding.textViewTemp.text = "High: ${forecast.maxTemp}$unit, Low: ${forecast.minTemp}$unit"
+
+        // Set weather icon based on condition
+        forecastBinding.imageViewCondition.setImageResource(getWeatherIcon(forecast.weatherCondition))
     }
 
     override fun getItemCount(): Int = forecastList.size
@@ -33,6 +37,16 @@ class ForecastAdapter(
             init {
                 itemView.tag = binding
             }
+        }
+    }
+
+    private fun getWeatherIcon(condition: String): Int {
+        return when (condition.toLowerCase()) {
+            "sunny" -> R.drawable.sun
+            "cloudy" -> R.drawable.cloud
+            "rainy" -> R.drawable.raining
+
+            else -> R.drawable.partly_cloud
         }
     }
 }
